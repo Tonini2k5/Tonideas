@@ -1,0 +1,464 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+
+    background:
+        radial-gradient(circle at top, rgba(59, 130, 246, 0.15), transparent 40%),
+        radial-gradient(circle at bottom, rgba(147, 51, 234, 0.12), transparent 40%),
+        linear-gradient(to bottom, #020617, #000000);
+
+    color: white;
+
+    height: 100vh;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+/* Pantalla principal */
+
+.intro {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    transition: opacity 1.5s ease;
+}
+
+/* Sobre */
+
+.envelope {
+    position: relative;
+
+    width: 220px;
+    height: 140px;
+
+    margin-bottom: 40px;
+
+    animation: float 3s ease-in-out infinite;
+
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.1));
+}
+
+/* Parte principal */
+
+.envelope-body {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(to bottom,
+            #d6d3d1,
+            #a8a29e);
+
+    border-radius: 8px;
+}
+
+/* Tapa */
+
+.envelope-top {
+    position: absolute;
+
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(to bottom,
+            #e7e5e4,
+            #d6d3d1);
+
+    clip-path: polygon(0 0,
+            50% 55%,
+            100% 0,
+            100% 0,
+            0 0);
+
+    z-index: 2;
+
+    transform-origin: top;
+
+    transition: transform 1.2s ease;
+}
+
+/* Título */
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.3rem;
+    opacity: 0.8;
+}
+
+/* Botón */
+
+button {
+    margin-top: 35px;
+
+    padding: 15px 34px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 50px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: white;
+
+    font-size: 1rem;
+
+    letter-spacing: 1px;
+
+    backdrop-filter: blur(12px);
+
+    cursor: pointer;
+
+    transition: all 0.35s ease;
+
+    box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.03);
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.14);
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 30px rgba(255, 255, 255, 0.08),
+        0 0 60px rgba(59, 130, 246, 0.08);
+}
+
+/* Carta */
+
+.letter {
+    position: absolute;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    backdrop-filter: blur(10px);
+    opacity: 1;
+    transition: opacity 1.5s ease;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease;
+}
+
+.letter-content {
+    position: relative;
+    z-index: 1;
+
+    width: 90%;
+    max-width: 720px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    padding: 60px;
+
+    border-radius: 28px;
+
+    backdrop-filter: blur(30px);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        0 0 40px rgba(255, 255, 255, 0.03),
+        0 0 120px rgba(59, 130, 246, 0.10),
+        inset 0 0 30px rgba(255, 255, 255, 0.03);
+
+    animation: letterAppear 2s ease;
+
+    transform: translateY(20px);
+
+    overflow: hidden;
+}
+
+.letter-content::before {
+    content: "";
+
+    position: absolute;
+
+    top: -100px;
+    left: -100px;
+
+    width: 250px;
+    height: 250px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    border-radius: 50%;
+
+    filter: blur(40px);
+}
+
+.date {
+    margin-bottom: 20px;
+    opacity: 0.6;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+
+    margin-bottom: 35px;
+
+    font-size: 3.2rem;
+
+    font-weight: 700;
+
+    color: rgba(255, 255, 255, 0.95);
+
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.08);
+}
+
+.letter-content p {
+    margin-bottom: 24px;
+
+    line-height: 1.9;
+
+    font-size: 1.3rem;
+
+    color: rgba(255, 255, 255, 0.88);
+}
+
+/* Animación */
+
+@keyframes float {
+
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+
+}
+
+/* Partículas */
+
+.particles {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: 0;
+}
+
+.particles span {
+    position: absolute;
+
+    display: block;
+
+    width: 4px;
+    height: 4px;
+
+    background: rgba(255, 255, 255, 0.4);
+
+    border-radius: 50%;
+
+    animation: particlesMove linear infinite;
+}
+
+/* Posiciones aleatorias */
+
+.particles span:nth-child(1) {
+    left: 10%;
+    animation-duration: 12s;
+    animation-delay: 0s;
+}
+
+.particles span:nth-child(2) {
+    left: 20%;
+    animation-duration: 18s;
+    animation-delay: 2s;
+}
+
+.particles span:nth-child(3) {
+    left: 35%;
+    animation-duration: 14s;
+    animation-delay: 4s;
+}
+
+.particles span:nth-child(4) {
+    left: 50%;
+    animation-duration: 20s;
+    animation-delay: 1s;
+}
+
+.particles span:nth-child(5) {
+    left: 65%;
+    animation-duration: 16s;
+    animation-delay: 3s;
+}
+
+.particles span:nth-child(6) {
+    left: 75%;
+    animation-duration: 22s;
+    animation-delay: 5s;
+}
+
+.particles span:nth-child(7) {
+    left: 85%;
+    animation-duration: 15s;
+    animation-delay: 2s;
+}
+
+.particles span:nth-child(8) {
+    left: 95%;
+    animation-duration: 19s;
+    animation-delay: 6s;
+}
+
+/* Movimiento */
+
+@keyframes particlesMove {
+
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+
+}
+
+@keyframes letterAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(80px) scale(0.96);
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0px) scale(1);
+    }
+
+}
+
+/* Resplandor detrás de la carta */
+
+.glow {
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    background: radial-gradient(circle,
+            rgba(59, 130, 246, 0.18),
+            transparent 70%);
+
+    filter: blur(50px);
+
+    z-index: 0;
+}
+
+#typedText {
+    font-size: 1.3rem;
+
+    line-height: 1.9;
+
+    color: rgba(255, 255, 255, 0.88);
+
+    white-space: pre-line;
+
+    text-shadow:
+        0 0 12px rgba(255, 255, 255, 0.03);
+}
+
+/* Responsive para celulares */
+
+@media (max-width: 768px) {
+
+    .letter-content {
+
+        width: 92%;
+
+        padding: 35px 28px;
+
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 2.3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    #typedText {
+        font-size: 1.1rem;
+
+        line-height: 1.8;
+    }
+
+    button {
+        padding: 14px 28px;
+
+        font-size: 0.95rem;
+    }
+
+    .envelope {
+        width: 180px;
+        height: 120px;
+    }
+
+}

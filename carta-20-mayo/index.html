@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para Ti</title>
+
+    <!-- Fuente elegante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Conectar CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="particles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Pantalla principal -->
+    <section class="intro">
+
+        <div class="envelope">
+
+            <div class="envelope-top"></div>
+
+            <div class="envelope-body"></div>
+
+        </div>
+
+        <h2>20 de mayo</h2>
+
+        <p>Tengo algo para ti.</p>
+
+        <button id="openBtn">
+            Abrir carta
+        </button>
+
+    </section>
+
+    <!-- Carta -->
+    <section class="letter hidden" id="letter">
+
+        <div class="letter-content">
+
+            <p class="date">
+                20 de mayo, 2026
+            </p>
+
+            <h1>Hola, amor.</h1>
+
+            <div id="typedText"></div>
+
+            <p class="signature">
+                ♡Tonini♡<br>
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Música -->
+    <audio id="music" loop>
+        <source src="music/Hecha Pa mi.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
