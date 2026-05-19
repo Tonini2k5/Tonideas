@@ -27,13 +27,21 @@ const closeBtn = document.getElementById("closeBtn");
 
 const flowers = document.getElementById("flowers");
 
+let isOpen = false;
+
 openBtn.addEventListener("click", () => {
+
+    if (isOpen) return;
+
+    isOpen = true;
+
+    stopFlowers();
 
     // Abrir sobre
     envelopeTop.style.transform = "rotateX(180deg)";
 
     // Música
-    music.play();
+    music.play().catch(() => { });
 
     // Esperar antes de mostrar carta
     setTimeout(() => {
@@ -64,7 +72,7 @@ function typeWriter(text, element, speed = 40) {
 
         if (i < text.length) {
 
-            element.innerHTML += text.charAt(i);
+            element.textContent += text.charAt(i);
 
             i++;
 
@@ -78,11 +86,15 @@ function typeWriter(text, element, speed = 40) {
 
 closeBtn.addEventListener("click", () => {
 
+    isOpen = false;
+
     // Ocultar carta
     letter.classList.add("hidden");
 
     // Mostrar intro nuevamente
     intro.style.display = "flex";
+
+    envelopeTop.style.transform = "rotateX(0deg)";
 
     setTimeout(() => {
         intro.style.opacity = "1";
@@ -93,9 +105,27 @@ closeBtn.addEventListener("click", () => {
 
     flowers.style.opacity = "1";
 
+    startFlowers();
+
 });
 
 const flowerEmojis = ["🌸", "🌼", "🌷", "🌹"];
+
+let flowerInterval = null;
+
+function startFlowers() {
+
+    if (flowerInterval) return;
+
+    flowerInterval = setInterval(createFlower, 900);
+}
+
+function stopFlowers() {
+
+    clearInterval(flowerInterval);
+
+    flowerInterval = null;
+}
 
 function createFlower() {
 
@@ -114,8 +144,7 @@ function createFlower() {
 
     flower.style.left = "-10vw";
 
-    flower.style.bottom =
-        Math.random() * 20 + "px";
+    flower.style.bottom = "15px";
 
     flower.style.animationDuration =
         (12 + Math.random() * 8) + "s";
@@ -126,7 +155,3 @@ function createFlower() {
         flower.remove();
     }, 20000);
 }
-
-/* Crear flores infinitamente */
-
-setInterval(createFlower, 500);
