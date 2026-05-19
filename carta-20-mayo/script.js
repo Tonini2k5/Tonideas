@@ -23,6 +23,10 @@ const intro = document.querySelector(".intro");
 
 const envelopeTop = document.querySelector(".envelope-top");
 
+const closeBtn = document.getElementById("closeBtn");
+
+const flowers = document.getElementById("flowers");
+
 openBtn.addEventListener("click", () => {
 
     // Abrir sobre
@@ -71,3 +75,58 @@ function typeWriter(text, element, speed = 40) {
 
     typing();
 }
+
+closeBtn.addEventListener("click", () => {
+
+    // Ocultar carta
+    letter.classList.add("hidden");
+
+    // Mostrar intro nuevamente
+    intro.style.display = "flex";
+
+    setTimeout(() => {
+        intro.style.opacity = "1";
+    }, 50);
+
+    // Mostrar flores
+    flowers.classList.remove("hidden");
+
+    flowers.style.opacity = "1";
+
+});
+
+const flowerEmojis = ["🌸", "🌼", "🌷", "🌹"];
+
+function createFlower() {
+
+    const flower = document.createElement("div");
+
+    flower.classList.add("flower");
+
+    const innerFlower = document.createElement("span");
+
+    innerFlower.classList.add("flower-inner");
+
+    innerFlower.innerText =
+        flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+
+    flower.appendChild(innerFlower);
+
+    flower.style.left = "-10vw";
+
+    flower.style.bottom =
+        Math.random() * 20 + "px";
+
+    flower.style.animationDuration =
+        (12 + Math.random() * 8) + "s";
+
+    flowers.appendChild(flower);
+
+    setTimeout(() => {
+        flower.remove();
+    }, 20000);
+}
+
+/* Crear flores infinitamente */
+
+setInterval(createFlower, 500);
