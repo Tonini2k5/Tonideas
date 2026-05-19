@@ -19,6 +19,53 @@ const intro = document.querySelector(".intro");
 const envelopeTop = document.querySelector(".envelope-top");
 const closeBtn = document.getElementById("closeBtn");
 const flowers = document.getElementById("flowers");
+const magicLayer = document.getElementById("magicLayer");
+
+const magicFigures = [
+    "❤️",
+    "🐱",
+    "🐼",
+    "🌲",
+    "🏍️",
+    "🏆",
+    "🥇",
+    "✏️",
+    "🐻",
+    "🐶",
+    "🌹",
+    "⭐",
+    "✨",
+    "💌",
+    "👩‍❤️‍👨",
+    "💙",
+    "💘",
+    "💞",
+    "Te amooo",
+    "Reina",
+    "Te quierooo",
+    "I love you",
+    "Tooooniiii",
+    "Carlitaaaa",
+    "muuuuaaack",
+    "MI LOCA💖",
+    "#TeOdioSamuel",
+    "Nerita linda🫠",
+    "Contigo, siempre",
+    "Mi todo",
+    "Solo tú",
+    "Bebé hermosa",
+    "mi todo🫶"
+];
+
+const fireworkColors = [
+    "#ff3b3b",
+    "#ff6b9a",
+    "#ffd1dc",
+    "#ffffff",
+    "#7dd3fc",
+    "#86efac",
+    "#facc15"
+];
 
 const flowerEmojis = ["🌸", "🌼", "🌷", "🌹"];
 
@@ -38,6 +85,9 @@ openBtn.addEventListener("click", () => {
     flowers.innerHTML = "";
     flowers.style.opacity = "0";
     flowers.classList.add("hidden");
+
+    document.body.classList.remove("magic-active");
+    magicLayer.innerHTML = "";
 
     envelopeTop.style.transform = "rotateX(180deg)";
 
@@ -102,6 +152,8 @@ closeBtn.addEventListener("click", () => {
 
     startFlowers();
 
+    document.body.classList.add("magic-active");
+
 });
 
 function startFlowers() {
@@ -142,4 +194,84 @@ function createFlower() {
     setTimeout(() => {
         flower.remove();
     }, 20000);
+}
+
+window.addEventListener("pointerdown", (e) => {
+
+    if (!document.body.classList.contains("magic-active")) return;
+
+    if (isOpen) return;
+
+    if (e.target.closest("button")) return;
+
+    createMagic(e.clientX, e.clientY);
+
+});
+
+function createMagic(x, y) {
+
+    const magic = document.createElement("div");
+
+    magic.classList.add("magic-item");
+
+    const content =
+        magicFigures[Math.floor(Math.random() * magicFigures.length)];
+
+    magic.innerText = content;
+
+    magic.style.left = x + "px";
+    magic.style.top = y + "px";
+
+    const color =
+        fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+
+    magic.style.color = color;
+    magic.style.textShadow = `
+        0 0 12px ${color},
+        0 0 28px ${color},
+        0 0 45px rgba(255,255,255,0.4)
+    `;
+
+    magicLayer.appendChild(magic);
+
+    createSparkles(x, y);
+
+    setTimeout(() => {
+        magic.remove();
+    }, 2600);
+}
+
+function createSparkles(x, y) {
+
+    const amount = 18;
+
+    for (let i = 0; i < amount; i++) {
+
+        const sparkle = document.createElement("span");
+
+        sparkle.classList.add("sparkle");
+
+        const angle = (Math.PI * 2 * i) / amount;
+        const distance = 35 + Math.random() * 45;
+
+        const moveX = Math.cos(angle) * distance;
+        const moveY = Math.sin(angle) * distance;
+
+        const color =
+            fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+
+        sparkle.style.left = x + "px";
+        sparkle.style.top = y + "px";
+        sparkle.style.background = color;
+        sparkle.style.boxShadow = `0 0 12px ${color}`;
+
+        sparkle.style.setProperty("--x", moveX + "px");
+        sparkle.style.setProperty("--y", moveY + "px");
+
+        magicLayer.appendChild(sparkle);
+
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1200);
+    }
 }
