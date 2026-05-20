@@ -7,10 +7,16 @@
 body {
     font-family: 'Cormorant Garamond', serif;
 
+    --fairy-color-1: rgba(59, 130, 246, 0.15);
+    --fairy-color-2: rgba(147, 51, 234, 0.12);
+    --fairy-color-3: #020617;
+
     background:
-        radial-gradient(circle at top, rgba(59, 130, 246, 0.15), transparent 40%),
-        radial-gradient(circle at bottom, rgba(147, 51, 234, 0.12), transparent 40%),
-        linear-gradient(to bottom, #020617, #000000);
+        radial-gradient(circle at top, var(--fairy-color-1), transparent 42%),
+        radial-gradient(circle at bottom, var(--fairy-color-2), transparent 45%),
+        linear-gradient(to bottom, var(--fairy-color-3), #000000);
+
+    transition: background 0.762s ease-in-out;
 
     color: white;
 

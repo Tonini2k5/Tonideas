@@ -45,7 +45,7 @@ const magicFigures = [
     "Te quierooo",
     "I love you",
     "Carlitaaaa",
-    "muuuuaaack",
+    "kawasaki",
     "LOCA💖",
     "#TeOdioSamuel",
     "Nerita linda🫠",
@@ -72,6 +72,43 @@ let isOpen = false;
 let flowerInterval = null;
 let typingTimeout = null;
 let fadeInterval = null;
+
+let fairyBackgroundStarted = false;
+let fairyBackgroundInterval = null;
+let fairyBackgroundIndex = 0;
+
+const fairyBackgrounds = [
+    {
+        color1: "rgba(125, 211, 252, 0.28)",
+        color2: "rgba(134, 239, 172, 0.20)",
+        color3: "#020617"
+    },
+    {
+        color1: "rgba(216, 180, 254, 0.30)",
+        color2: "rgba(59, 130, 246, 0.22)",
+        color3: "#050014"
+    },
+    {
+        color1: "rgba(253, 224, 71, 0.22)",
+        color2: "rgba(244, 114, 182, 0.20)",
+        color3: "#09020f"
+    },
+    {
+        color1: "rgba(167, 243, 208, 0.26)",
+        color2: "rgba(147, 197, 253, 0.22)",
+        color3: "#00110d"
+    },
+    {
+        color1: "rgba(240, 171, 252, 0.24)",
+        color2: "rgba(196, 181, 253, 0.28)",
+        color3: "#080014"
+    },
+    {
+        color1: "rgba(186, 230, 253, 0.28)",
+        color2: "rgba(255, 255, 255, 0.13)",
+        color3: "#020617"
+    }
+];
 
 openBtn.addEventListener("click", () => {
 
@@ -152,6 +189,8 @@ closeBtn.addEventListener("click", () => {
     startFlowers();
 
     document.body.classList.add("magic-active");
+
+    startFairyBackground();
 
 });
 
@@ -272,5 +311,35 @@ function createSparkles(x, y) {
         setTimeout(() => {
             sparkle.remove();
         }, 1200);
+    }
+}
+
+function startFairyBackground() {
+
+    if (fairyBackgroundStarted) return;
+
+    fairyBackgroundStarted = true;
+
+    document.body.classList.add("fairy-background-active");
+
+    changeFairyBackground();
+
+    fairyBackgroundInterval = setInterval(() => {
+        changeFairyBackground();
+    }, 762);
+}
+
+function changeFairyBackground() {
+
+    const bg = fairyBackgrounds[fairyBackgroundIndex];
+
+    document.body.style.setProperty("--fairy-color-1", bg.color1);
+    document.body.style.setProperty("--fairy-color-2", bg.color2);
+    document.body.style.setProperty("--fairy-color-3", bg.color3);
+
+    fairyBackgroundIndex++;
+
+    if (fairyBackgroundIndex >= fairyBackgrounds.length) {
+        fairyBackgroundIndex = 0;
     }
 }
